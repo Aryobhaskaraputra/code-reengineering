@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speculative Generality</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="prism/prism.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+          <div class="sidebar-header">
+            <h3>Code Refactoring</h3>
+          </div>
+          <ul class="list-unstyled components">
+            <li>
+              <a href="home.html">Home</a>
+            </li>
+            <li>
+              <a
+                href="#pageSubmenu"
+                data-toggle="collapse"
+                aria-expanded="false"
+                class="dropdown-toggle"
+                >Change Preventers</a
+              >
+              <ul class="collapse list-unstyled" id="pageSubmenu">
+                <li>
+                  <a href="divergent-change.html">Divergent Change</a>
+                </li>
+                <li>
+                  <a href="shotgun-surgery.html">Shotgun Surgery</a>
+                </li>
+                <li>
+                  <a href="parallel-inheritanve-hierarchies.html">Parallel Inheritance Hierarchies</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a
+                href="#dispansablesSubmenu"
+                data-toggle="collapse"
+                aria-expanded="false"
+                class="dropdown-toggle"
+                >Dispansables</a
+              >
+              <ul class="collapse list-unstyled" id="dispansablesSubmenu">
+                <li>
+                  <a href="comments.html">Comments</a>
+                </li>
+                <li>
+                  <a href="duplicate-code.html">Duplicate Code</a>
+                </li>
+                <li>
+                  <a href="lazy-class.html">Lazy Class</a>
+                </li>
+                <li>
+                  <a href="data-class.html">Data Class</a>
+                </li>
+                <li>
+                  <a href="dead-code.html">Dead Code</a>
+                </li>
+                <li>
+                  <a href="speculative-generality.html">Speculative Generality</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <div class="footer">
+            <p>&copy; 2024 Anthony Fernando Setiabudi & Aryo Bhaskaraputra. All rights reserved.</p>
+          </div>
+        </nav>
+  
+        <!-- Page Content  -->
+        <div id="content">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <label class="hamburger">
+                <input type="checkbox" id="sidebarCollapse" />
+                <svg viewBox="0 0 32 32">
+                  <path
+                    class="line line-top-bottom"
+                    d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"
+                  ></path>
+                  <path class="line" d="M7 16 27 16"></path>
+                </svg>
+              </label>
+            </div>
+          </nav>
+  
+          <h1>Speculative Generality</h1>
+          <div class="content-image m-4">
+            <img
+              src="assets/speculative-generality-01.png"
+              style="height: 13vw; width: 100%; object-fit: contain"
+              alt="Divergent Change"
+            />
+          </div>
+          <br />
+          <div class="sub-section">
+            <ul>
+              <div class="penjelasan">
+                <li><h4>Apa Itu Speculative Generality?</h4></li>
+                <p>
+                  <b><i>Speculative Generality</i></b
+                  >, adalah salah satu jenis code smell yang terjadi ketika terdapat 
+                  kelas, modul, atau fungsi dalam sebuah program yang dirancang untuk 
+                  menangani banyak kasus yang mungkin terjadi di masa depan, namun pada 
+                  kenyataannya, kebutuhan tersebut tidak pernah muncul atau terjadi. 
+                  Dalam kata lain, Speculative Generality terjadi ketika sebuah komponen 
+                  perangkat lunak lebih kompleks dari yang seharusnya, karena mencoba 
+                  memprediksi kebutuhan yang mungkin muncul di masa mendatang, tanpa 
+                  adanya bukti konkret bahwa kebutuhan tersebut akan muncul.
+                </p>
+                <p>
+                  Keberadaan <b><i>Speculative Generality</i></b> dapat mengakibatkan 
+                  kompleksitas yang tidak perlu dalam kode sumber, meningkatkan risiko 
+                  kesalahan, dan membuat pemeliharaan kode menjadi lebih sulit. Selain 
+                  itu, komponen perangkat lunak yang terlalu generik atau umum juga 
+                  dapat sulit dipahami oleh pengembang baru atau pengembang yang tidak 
+                  terlibat dalam pengembangan awalnya.
+                </p>
+                <p>
+                  Dengan memahami <b><i>Speculative Generality</i></b>, pengembang dapat 
+                  lebih berhati-hati dalam merancang komponen perangkat lunak dan menghindari 
+                  jebakan kompleksitas yang tidak perlu.
+                </p>
+              </div>
+  
+              <br />
+              <div class="tanda-tanda">
+                <li><h4>Tanda-tanda Speculative Generality</h4></li>
+                <p>
+                  Bagaimana kita tahu jika kode kita terdapat adanya Speculative Generality?
+                  Berikut adalah beberapa tanda yang dapat membantu Anda
+                  mengidentifikasi keberadaannya:
+                </p>
+                <ol>
+                  <li>
+                    <p>
+                      <b>Kelas atau Modul yang Terlalu Umum:</b> Perhatikan kelas atau modul 
+                      yang merangkum banyak kasus yang mungkin terjadi di masa depan, namun 
+                      pada kenyataannya, hanya sebagian kecil dari kasus tersebut yang terjadi. 
+                      Contoh kelas atau modul seperti ini sering kali memiliki banyak opsi 
+                      parameter atau metode yang tidak selalu digunakan dalam setiap kasus penggunaan.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <b>Fitur atau Fungsionalitas yang Tidak Digunakan:</b> Tinjau fitur atau 
+                      fungsionalitas yang telah dirancang untuk menangani situasi yang belum 
+                      pernah terjadi atau kebutuhan yang belum tentu muncul. Jika fitur-fitur 
+                      ini jarang digunakan atau bahkan tidak pernah dipanggil, mungkin ada 
+                      tanda Speculative Generality.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <b>Komponen yang Sulit Dipahami:</b> Jika terdapat kelas atau modul yang 
+                      terlalu kompleks atau sulit dipahami karena mencoba menangani banyak 
+                      kasus yang mungkin terjadi di masa depan, ini bisa menjadi tanda Speculative 
+                      Generality. Kompleksitas yang berlebihan dalam desain sering kali menunjukkan 
+                      adanya upaya untuk memprediksi kebutuhan yang belum tentu muncul.
+                    </p>
+                  </li>
+                </ol>
+                <p>
+                  Dengan memperhatikan tanda-tanda ini, Anda dapat mengidentifikasi Speculative Generality 
+                  dalam kode sumber Anda dan mengambil langkah-langkah yang diperlukan untuk membersihkannya. 
+                  Dengan mempertahankan kode yang bersih dan efisien, Anda dapat meningkatkan keterbacaan, 
+                  pemeliharaan, dan skalabilitas dari proyek perangkat lunak Anda.
+                </p>
+              </div>
+              <br />
+              <div class="strategi">
+                <li><h4>Strategi untuk Mengatasi Speculative Generality</h4></li>
+                <p>
+                  Mengatasi Speculative Generality dalam kode sumber merupakan langkah 
+                  penting untuk menjaga kebersihan, keterbacaan, dan kualitas dari proyek 
+                  perangkat lunak Anda. Berikut adalah beberapa strategi yang dapat Anda 
+                  terapkan untuk mengatasi Speculative Generality:
+                </p>
+                <ol>
+                  <li>
+                    <p>
+                      <b>Kembangkan dengan Keperluan Saat Ini:</b> Fokuskan perancangan 
+                      dan implementasi kelas atau modul pada kebutuhan saat ini, bukan 
+                      pada spekulasi tentang apa yang mungkin diperlukan di masa mendatang. 
+                      Hindari menambahkan fitur atau fungsionalitas yang tidak diperlukan 
+                      saat ini dan tetapkan prinsip bahwa "tidak ada spekulasi tanpa bukti".
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <b>Refaktorisasi Kode yang Terlalu Umum:</b> Tinjau kembali kelas atau 
+                      modul yang terlalu umum dan refaktorlah agar menjadi lebih spesifik 
+                      sesuai dengan kebutuhan saat ini. Pisahkan fungsionalitas yang tidak 
+                      relevan atau jarang digunakan ke dalam kelas atau modul yang terpisah, 
+                      atau hapuslah sepenuhnya jika tidak diperlukan.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <b>Fokus pada Keterbacaan dan Keterartikan:</b>
+                      Desainlah kelas atau modul dengan fokus pada keterbacaan dan keterartikan. 
+                      Buatlah kode yang mudah dipahami dan mudah dimodifikasi oleh pengembang lain 
+                      dengan menghindari kompleksitas yang tidak perlu.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <b>Pemantauan Ketergantungan Antar Komponen:</b>Perhatikan ketergantungan antar 
+                      kelas atau modul dalam proyek Anda. Identifikasi dan evaluasi ketergantungan 
+                      yang tidak perlu atau berlebihan dan ambil langkah-langkah untuk memecahnya 
+                      menjadi bagian yang lebih kecil dan lebih fokus.
+                    </p>
+                  </li>
+                </ol>
+                <p>
+                  Dengan menerapkan strategi ini secara konsisten, Anda dapat mengatasi Speculative Generality 
+                  dalam kode sumber Anda dan memastikan bahwa proyek perangkat lunak Anda tetap efisien, 
+                  mudah dipelihara, dan sesuai dengan kebutuhan saat ini tanpa membebani dengan kompleksitas 
+                  yang tidak perlu.
+                </p>
+              </div>
+              <br />
+          <div class="contoh-kasus">
+            <li><h4>Contoh Kasus</h4></li>
+            <p>
+              Salah satu prinsip extreme programming (XP) yang terkenal adalah You aren’t gonna need it (YAGNI). 
+              Disarankan oleh XP untuk tidak menambahkan fungsionalitas sampai benar-benar diperlukan.
+            </p>
+            <p>Contohnya, pada package before.</p>
+            <p>Requirement dari client adalah Price bisa memiliki Currency antara IDR atau USD.</p>
+            <p>Programmer berspekulasi bahwa IDR dan USD adalah kurs jenis tradisional, nantinya akan ada kurs jenis digital seperti bitcoin. 
+              Oleh karena itu, Programmer membuat hirarki seperti di dalam package before.</p>
+            <h5 style="text-align: center">Before</h5>
+            <div class="container">
+              <div class="box-code">
+                <p style="font-weight: bold">Currency.java :</p>
+                <pre><code class="language-java">
+  package fowler.dispensables.speculative_generality.before;
+  
+  public abstract class Currency {
+      public abstract String getCode();
+  }
+              </code></pre>
+              </div>
+            </div>
+            <br>
+            <div class="container">
+              <div class="box-code">
+                <p style="font-weight: bold">Digital.java :</p>
+                <pre><code class="language-java">
+  package fowler.dispensables.speculative_generality.before;
+  
+  public abstract class Digital extends Currency {
+  
+  }
+              </code></pre>
+              </div>
+            </div>
+            <br />
+            <div class="container">
+              <div class="box-code">
+                <p style="font-weight: bold">IDR.java :</p>
+                <pre><code class="language-java">
+  package fowler.dispensables.speculative_generality.before;
+  
+  public class IDR extends Traditional {
+      @Override
+      public String getCode() {
+          return "IDR";
+      }
+  }
+              </code></pre>
+              </div>
+            </div>
+          <br />
+          <div class="container">
+            <div class="box-code">
+              <p style="font-weight: bold">Price.java :</p>
+              <pre><code class="language-java">
+  package fowler.dispensables.speculative_generality.before;
+  
+  public class Price {
+      int value;
+      Currency currency;
+      
+      public Price(int value, Currency currency) {
+          this.value = value;
+          this.currency = currency;
+      }
+      
+      public int getValue() {
+          return value;
+      }
+      public void setValue(int value) {
+          this.value = value;
+      }
+      public Currency getCurrency() {
+          return currency;
+      }
+      public void setCurrency(Currency currency) {
+          this.currency = currency;
+      }
+  }
+            </code></pre>
+            </div>
+          </div>
+        <br />
+        <div class="container">
+          <div class="box-code">
+            <p style="font-weight: bold">Traditional.java :</p>
+            <pre><code class="language-java">
+  package fowler.dispensables.speculative_generality.before;
+  
+  public abstract class Traditional extends Currency {
+  
+  }
+        </code></pre>
+        </div>
+      </div>
+      <br />
+      <div class="container">
+        <div class="box-code">
+          <p style="font-weight: bold">USD.java :</p>
+          <pre><code class="language-java">
+          package fowler.dispensables.speculative_generality.before;
+  
+          public class USD extends Traditional {
+            @Override
+            public String getCode() {
+              return "USD";
+            }
+          }
+      </code></pre>
+      </div>
+    </div>
+    <br />
+  
+            <h5 style="text-align: center">After</h5>
+  
+            <div class="container">
+              <div class="box-code">
+                <p style="font-weight: bold">Currency.java :</p>
+                <pre><code class="language-java">
+  package fowler.dispensables.speculative_generality.after;
+  
+  public abstract class Currency {
+      public abstract String getCode();
+  }
+              </code></pre>
+              </div>
+            </div>
+            <br />
+            <div class="container">
+              <div class="box-code">
+                <p style="font-weight: bold">IDR.java :</p>
+                <pre><code class="language-java">
+  package fowler.dispensables.speculative_generality.after;
+  
+  public class IDR extends Currency {
+      
+      @Override
+      public String getCode() {
+          return "IDR";
+      }
+  }
+              </code></pre>
+              </div>
+            </div>
+            <br />
+            <div class="container">
+              <div class="box-code">
+                <p style="font-weight: bold">Price.java :</p>
+                <pre><code class="language-java">
+  package fowler.dispensables.speculative_generality.after;
+  
+  public class Price {
+      int value;
+      Currency currency;
+      
+      public Price(int value, Currency currency) {
+          this.value = value;
+          this.currency = currency;
+      }
+      
+      public int getValue() {
+          return value;
+      }
+      public void setValue(int value) {
+          this.value = value;
+      }
+      public Currency getCurrency() {
+          return currency;
+      }
+      public void setCurrency(Currency currency) {
+          this.currency = currency;
+      }
+  }
+              </code></pre>
+              </div>
+            </div>
+            <br />
+            <div class="container">
+              <div class="box-code">
+                <p style="font-weight: bold">USD.java :</p>
+                <pre><code class="language-java">
+  package fowler.dispensables.speculative_generality.after;
+  
+  public class USD extends Currency {
+  
+      @Override
+      public String getCode() {
+          return "USD";
+      }
+  }
+              </code></pre>
+              </div>
+            </div>
+            <br />
+            <br>
+            <p>Dilakukan Collapse Hierarchy. Class Traditional dan Digital dihapus. class USD dan IDR menjadi turunan langsung dari class Currency.</p>
+          </div>
+        </div>
+      </div>
+    </body>
+          <script src="script.js"></script>
+          <script src="prism/prism.js"></script>
+</html>

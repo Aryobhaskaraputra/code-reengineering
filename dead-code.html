@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dead Code</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="prism/prism.css">
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+          <div class="sidebar-header">
+            <h3>Code Refactoring</h3>
+          </div>
+          <ul class="list-unstyled components">
+            <li>
+              <a href="home.html">Home</a>
+            </li>
+            <li>
+              <a
+                href="#pageSubmenu"
+                data-toggle="collapse"
+                aria-expanded="false"
+                class="dropdown-toggle"
+                >Change Preventers</a
+              >
+              <ul class="collapse list-unstyled" id="pageSubmenu">
+                <li>
+                  <a href="divergent-change.html">Divergent Change</a>
+                </li>
+                <li>
+                  <a href="shotgun-surgery.html">Shotgun Surgery</a>
+                </li>
+                <li>
+                  <a href="parallel-inheritanve-hierarchies.html">Parallel Inheritance Hierarchies</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a
+                href="#dispansablesSubmenu"
+                data-toggle="collapse"
+                aria-expanded="false"
+                class="dropdown-toggle"
+                >Dispansables</a
+              >
+              <ul class="collapse list-unstyled" id="dispansablesSubmenu">
+                <li>
+                  <a href="comments.html">Comments</a>
+                </li>
+                <li>
+                  <a href="duplicate-code.html">Duplicate Code</a>
+                </li>
+                <li>
+                  <a href="lazy-class.html">Lazy Class</a>
+                </li>
+                <li>
+                  <a href="data-class.html">Data Class</a>
+                </li>
+                <li>
+                  <a href="dead-code.html">Dead Code</a>
+                </li>
+                <li>
+                  <a href="speculative-generality.html">Speculative Generality</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <div class="footer">
+            <p>&copy; 2024 Anthony Fernando Setiabudi & Aryo Bhaskaraputra. All rights reserved.</p>
+          </div>
+        </nav>
+  
+        <!-- Page Content  -->
+        <div id="content">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <label class="hamburger">
+                <input type="checkbox" id="sidebarCollapse" />
+                <svg viewBox="0 0 32 32">
+                  <path
+                    class="line line-top-bottom"
+                    d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"
+                  ></path>
+                  <path class="line" d="M7 16 27 16"></path>
+                </svg>
+              </label>
+              <!-- <button type="button" id="sidebarCollapse" class="btn btn-info">
+                <i class="fas fa-align-left"></i>
+                <span>Toggle Sidebar</span>
+              </button> -->
+            </div>
+          </nav>
+  
+          <h1>Dead Code</h1>
+          <div class="content-image m-4">
+            <img
+              src="assets/dead-code-01.png"
+              style="height: 13vw; width: 100%; object-fit: contain"
+              alt="Divergent Change"
+            />
+          </div>
+          <br />
+          <div class="sub-section">
+            <ul>
+              <div class="penjelasan">
+                <li><h4>Apa Itu Dead Code?</h4></li>
+                <p>
+                  <b><i>Dead Code</i></b
+                  >, adalah istilah yang digunakan dalam pengembangan perangkat lunak 
+                  untuk merujuk pada bagian-bagian dari kode sumber yang tidak lagi 
+                  digunakan atau dieksekusi dalam aplikasi. Dalam konteks code smell, 
+                  Dead Code merupakan salah satu indikasi bahwa terdapat fragmen kode 
+                  yang tidak memberikan kontribusi fungsional apa pun kepada aplikasi.
+                </p>
+                <p>
+                  Penyebab <b><i>Dead Code</i></b> bisa bermacam-macam, mulai dari 
+                  refaktorisasi kode yang tidak sempurna hingga perubahan kebutuhan 
+                  fungsional aplikasi.
+                </p>
+                <p>
+                  Mengidentifikasi <b><i>Dead Code</i></b> adalah bagian penting dari 
+                  pemeliharaan kode yang baik. Dengan membersihkan Dead Code dari 
+                  proyek Anda, Anda dapat meningkatkan kebersihan, keterbacaan, dan 
+                  kinerja keseluruhan dari aplikasi Anda.
+                </p>
+              </div>
+  
+              <br />
+              <div class="tanda-tanda">
+                <li><h4>Tanda-tanda Dead Code</h4></li>
+                <p>
+                  Bagaimana kita tahu jika kode kita terdapat adanya Dead Code?
+                  Berikut adalah beberapa tanda yang dapat membantu Anda
+                  mengidentifikasi keberadaannya:
+                </p>
+                <ol>
+                  <li>
+                    <p>
+                      <b>Fungsi atau Metode Tidak Dipanggil:</b> Perhatikan fungsi atau 
+                      metode yang didefinisikan namun tidak pernah dipanggil dari bagian 
+                      lain dalam kode. Fungsi-fungsi ini mungkin merupakan bagian dari 
+                      implementasi lama yang tidak lagi diperlukan atau telah digantikan 
+                      oleh fungsionalitas baru.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <b>Variabel Tidak Digunakan:</b> Tinjau variabel yang dideklarasikan 
+                      tetapi tidak pernah digunakan dalam aliran eksekusi program. Variabel 
+                      yang tidak digunakan ini sering kali merupakan sisa-sisa dari pengembangan 
+                      sebelumnya atau kesalahan dalam logika program.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <b>Kode yang Tidak Diakses:</b> Perhatikan modul, kelas, atau bagian-bagian 
+                      kode lain yang tidak pernah diakses dalam aplikasi. Kode-kode ini mungkin 
+                      merupakan sisa-sisa dari iterasi pengembangan sebelumnya yang tidak lagi 
+                      relevan dengan kebutuhan aplikasi saat ini.
+                    </p>
+                  </li>
+                </ol>
+                <p>
+                  Dengan memperhatikan tanda-tanda ini, Anda dapat mengidentifikasi Dead Code dalam 
+                  kode sumber Anda dan mengambil langkah-langkah yang diperlukan untuk membersihkannya. 
+                  Dengan membersihkan Dead Code secara teratur, Anda dapat menjaga kebersihan dan 
+                  kualitas dari kode Anda, serta meningkatkan efisiensi dan keterbacaan dari proyek 
+                  perangkat lunak Anda.
+                </p>
+              </div>
+              <br />
+              <div class="strategi">
+                <li><h4>Strategi untuk Mengatasi Dead Code</h4></li>
+                <p>
+                  Mengatasi Dead Code dalam kode sumber merupakan langkah penting untuk 
+                  meningkatkan kebersihan, keterbacaan, dan performa dari aplikasi Anda. 
+                  Berikut adalah beberapa strategi yang dapat Anda terapkan untuk mengatasi 
+                  Dead Code:
+                </p>
+                <ol>
+                  <li>
+                    <p>
+                      <b>Analisis Kode yang Teliti:</b>  Lakukan analisis kode yang teliti 
+                      untuk mengidentifikasi bagian-bagian kode yang tidak aktif atau tidak 
+                      digunakan. Tinjau setiap fungsi, metode, variabel, dan modul untuk 
+                      memastikan bahwa mereka benar-benar digunakan dalam aliran eksekusi program.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <b>Pembersihan Kode yang Rutin:</b> Tetapkan jadwal rutin untuk membersihkan 
+                      Dead Code dari proyek Anda. Buat daftar potensial kode yang tidak digunakan 
+                      dan identifikasi mana yang dapat dihapus atau dinonaktifkan.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <b>Pemantauan Perubahan Kode:</b>
+                      Perhatikan setiap perubahan yang terjadi dalam proyek Anda dan pastikan bahwa 
+                      Dead Code tidak muncul kembali. Manfaatkan alat bantu seperti sistem kontrol 
+                      versi untuk melacak perubahan kode dan memeriksa adanya penambahan Dead Code.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <b>Pengujian dan Validasi:</b>Setelah menghapus atau menonaktifkan Dead Code, 
+                      lakukan pengujian menyeluruh untuk memastikan bahwa perubahan tersebut tidak 
+                      menyebabkan masalah baru dalam aplikasi Anda. Pastikan untuk menguji berbagai 
+                      skenario penggunaan untuk memverifikasi bahwa aplikasi masih berfungsi dengan baik.
+                    </p>
+                  </li>
+                </ol>
+                <p>
+                  Dengan menerapkan strategi ini secara konsisten, Anda dapat mengatasi Dead Code dalam 
+                  kode sumber Anda dan meningkatkan kebersihan serta efektivitas dari proyek perangkat 
+                  lunak yang Anda kembangkan. Teruslah memantau dan memperbarui kode Anda secara teratur 
+                  untuk menghindari akumulasi Dead Code dan memastikan bahwa aplikasi Anda tetap efisien 
+                  dan mudah dipelihara.
+                </p>
+              </div>
+              <br />
+          <div class="contoh-kasus">
+            <li><h4>Contoh Kasus</h4></li>
+            <p>
+              Awalnya requirement dari client adalah: diskon diberikan 10% bila harga kurang dari 10.000, 
+              jika lebih, diskon 20%. Terbentuklah code berikut:
+            </p>
+            <h5 style="text-align: center">Before</h5>
+            <div class="container">
+              <div class="box-code">
+                <p style="font-weight: bold"></p>
+                <pre><code class="language-java">
+  public double calculate(double price, boolean isDiscount){
+    double discountPrice = 0;
+  
+    if(isDiscount){
+      if(price < 10000){
+        discountPrice = price * 0.1;
+      } else {
+        discountPrice = price * 0.2;
+      }
+    }
+  
+    return price - discountPrice;
+  }
+              </code></pre>
+              </div>
+            </div>
+            <br>
+            <p>Tiba-tiba, requirement dari client berubah. Client meminta diskon diketok rata 15%.</p>
+            <p>Programmer tidak menghapus if yang pertama.
+              Ia langsung menambahkan di bagian bawah sebelum return. Secara requirement, ini tidak masalah. Diskon akan selalu 15%.</p>
+            <br>
+            <div class="container">
+              <div class="box-code">
+                <p style="font-weight: bold"></p>
+                <pre><code class="language-java">
+  public double calculate(double price, boolean isDiscount){
+    double discountPrice = 0;
+  
+    if(isDiscount){
+      if(price < 10000){
+        discountPrice = price * 0.1;
+      } else {
+        discountPrice = price * 0.2;
+      }
+    }
+  
+    if(isDiscount)
+      discountPrice = price * 0.15;
+    return price - discountPrice;
+  }
+              </code></pre>
+              </div>
+            </div>
+            <br />
+            
+            <h5 style="text-align: center">After</h5>
+  
+            <div class="container">
+              <div class="box-code">
+                <p style="font-weight: bold">PriceCalculator.java :</p>
+                <pre><code class="language-java">
+  package fowler.dispensables.dead_code.after;
+  
+  public class PriceCalculator {
+      public double calculate(double price, boolean isDiscount){
+          double discountPrice = 0;
+      
+          if(isDiscount) discountPrice = price * 0.15;
+          
+          return price - discountPrice;
+      }
+  }
+              </code></pre>
+              </div>
+            </div>
+            <br />
+            <br>
+            <p>Variabel discountPrice akan selalu ditimpa di line of code selanjutnya. Sehingga bagian yang tidak penting aman untuk dibuang.</p>
+          </div>
+        </div>
+      </div> 
+</body>
+    <script src="script.js"></script>
+    <script src="prism/prism.js"></script>
+</html>

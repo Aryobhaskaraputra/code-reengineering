@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Class</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="prism/prism.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+          <div class="sidebar-header">
+            <h3>Code Refactoring</h3>
+          </div>
+          <ul class="list-unstyled components">
+            <li>
+              <a href="home.html">Home</a>
+            </li>
+            <li>
+              <a
+                href="#pageSubmenu"
+                data-toggle="collapse"
+                aria-expanded="false"
+                class="dropdown-toggle"
+                >Change Preventers</a
+              >
+              <ul class="collapse list-unstyled" id="pageSubmenu">
+                <li>
+                  <a href="divergent-change.html">Divergent Change</a>
+                </li>
+                <li>
+                  <a href="shotgun-surgery.html">Shotgun Surgery</a>
+                </li>
+                <li>
+                  <a href="parallel-inheritanve-hierarchies.html">Parallel Inheritance Hierarchies</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a
+                href="#dispansablesSubmenu"
+                data-toggle="collapse"
+                aria-expanded="false"
+                class="dropdown-toggle"
+                >Dispansables</a
+              >
+              <ul class="collapse list-unstyled" id="dispansablesSubmenu">
+                <li>
+                  <a href="comments.html">Comments</a>
+                </li>
+                <li>
+                  <a href="duplicate-code.html">Duplicate Code</a>
+                </li>
+                <li>
+                  <a href="lazy-class.html">Lazy Class</a>
+                </li>
+                <li>
+                  <a href="data-class.html">Data Class</a>
+                </li>
+                <li>
+                  <a href="dead-code.html">Dead Code</a>
+                </li>
+                <li>
+                  <a href="speculative-generality.html">Speculative Generality</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <div class="footer">
+            <p>&copy; 2024 Anthony Fernando Setiabudi & Aryo Bhaskaraputra. All rights reserved.</p>
+          </div>
+        </nav>
+  
+        <!-- Page Content  -->
+        <div id="content">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <label class="hamburger">
+                <input type="checkbox" id="sidebarCollapse" />
+                <svg viewBox="0 0 32 32">
+                  <path
+                    class="line line-top-bottom"
+                    d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"
+                  ></path>
+                  <path class="line" d="M7 16 27 16"></path>
+                </svg>
+              </label>
+              <!-- <button type="button" id="sidebarCollapse" class="btn btn-info">
+                <i class="fas fa-align-left"></i>
+                <span>Toggle Sidebar</span>
+              </button> -->
+            </div>
+          </nav>
+  
+          <h1>Data Class</h1>
+          <div class="content-image m-4">
+            <img
+              src="assets/data-class-01.png"
+              style="height: 13vw; width: 100%; object-fit: contain"
+              alt="Divergent Change"
+            />
+          </div>
+          <br />
+          <div class="sub-section">
+            <ul>
+              <div class="penjelasan">
+                <li><h4>Apa Itu Data Class?</h4></li>
+                <p>
+                  <b><i>Data Class</i></b
+                  >, merujuk pada kelas dalam sebuah program yang kebanyakan hanya 
+                  berisi properti atau data tanpa adanya logika bisnis atau fungsi 
+                  yang signifikan. Dalam konteks code smell, keberadaan Data Class 
+                  menunjukkan bahwa kelas tersebut mungkin tidak memberikan nilai 
+                  tambah yang cukup signifikan dalam struktur perangkat lunak.
+                </p>
+                <p>
+                  Kehadiran <b><i>Data Class</i></b> dalam kode sumber dapat mengakibatkan 
+                  kompleksitas yang tidak perlu dan mempersulit pemeliharaan serta 
+                  pengembangan lebih lanjut dari aplikasi. Selain itu, mereka dapat menjadi 
+                  tanda bahwa desain perangkat lunak Anda perlu direfaktorisasi untuk 
+                  mengurangi redundansi dan meningkatkan kohesi antar kelas.
+                </p>
+                <p>
+                  Dengan memahami <b><i>Data Class</i></b>,  Anda dapat mengidentifikasi 
+                  pola-pola tersebut dalam kode sumber Anda dan mengambil langkah-langkah 
+                  yang diperlukan untuk meningkatkan kebersihan serta efisiensi dari struktur 
+                  perangkat lunak yang Anda kembangkan.
+                </p>
+              </div>
+  
+              <br />
+              <div class="tanda-tanda">
+                <li><h4>Tanda-tanda Data Class</h4></li>
+                <p>
+                  Bagaimana kita tahu jika kode kita terdapat adanya Data Class?
+                  Berikut adalah beberapa tanda yang dapat membantu Anda
+                  mengidentifikasi keberadaannya:
+                </p>
+                <ol>
+                  <li>
+                    <p>
+                      <b>Hanya Berisi Properti:</b> Jika sebuah kelas hanya terdiri 
+                      dari beberapa properti tanpa adanya logika atau perilaku tambahan 
+                      yang terkait, ini bisa menjadi indikasi bahwa kelas tersebut adalah 
+                      Data Class.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <b>Tidak Ada Logika Bisnis:</b> Jika kelas hanya berfungsi sebagai 
+                      wadah untuk data tanpa melakukan operasi yang berhubungan dengan 
+                      bisnis atau domain aplikasi, ini bisa menjadi tanda bahwa kelas 
+                      tersebut adalah Data Class.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <b>Tidak Ada Ketergantungan:</b> Jika kelas tersebut memiliki 
+                      ketergantungan yang minim atau tidak signifikan terhadap kelas 
+                      lain dalam proyek, pertimbangkan apakah kelas tersebut benar-benar 
+                      diperlukan atau bisa digabungkan dengan kelas lain yang lebih relevan. 
+                      Ketergantungan yang minim bisa menjadi indikasi bahwa kelas tersebut 
+                      hanya berfungsi sebagai Data Class.
+                    </p>
+                  </li>
+                </ol>
+                <p>
+                  Dengan memperhatikan tanda-tanda ini, Anda dapat mengidentifikasi keberadaan 
+                  Data Class dalam kode sumber Anda dan mengambil langkah-langkah yang diperlukan 
+                  untuk meningkatkan kebersihan dan efektivitas dari struktur perangkat lunak yang 
+                  Anda kembangkan.
+                </p>
+              </div>
+              <br />
+              <div class="strategi">
+                <li><h4>Strategi untuk Mengatasi Data Class</h4></li>
+                <p>
+                  Mengatasi Data Class dalam kode sumber merupakan langkah penting 
+                  untuk meningkatkan kebersihan, kohesi, dan efektivitas dari proyek 
+                  perangkat lunak Anda. Berikut adalah beberapa strategi yang dapat 
+                  Anda terapkan untuk mengatasi Data Class:
+                </p>
+                <ol>
+                  <li>
+                    <p>
+                      <b>Refaktorisasi Kode:</b> Langkah pertama dalam mengatasi Data 
+                      Class adalah dengan melakukan refaktorisasi kode. Tinjau ulang 
+                      kelas-kelas yang diidentifikasi sebagai Data Class dan pertimbangkan 
+                      untuk menggabungkannya dengan kelas lain yang relevan atau memindahkan 
+                      logika bisnis yang terkait ke dalam kelas yang lebih sesuai. Dengan 
+                      cara ini, Anda dapat mengurangi kompleksitas kode dan meningkatkan 
+                      kohesi antar kelas.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <b>Penerapan Metode-Metode Operasi:</b> Jika sebuah kelas hanya berisi 
+                      properti tanpa adanya operasi atau logika tambahan, pertimbangkan untuk 
+                      menambahkan metode-metode operasi yang relevan ke dalam kelas tersebut. 
+                      Misalnya, Anda dapat menambahkan metode untuk memproses atau memanipulasi 
+                      data yang disimpan dalam kelas, sehingga kelas tersebut tidak hanya berfungsi 
+                      sebagai wadah untuk data tetapi juga memiliki fungsionalitas yang berguna.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <b>Pemisahan Fungsionalitas:</b>
+                      Jika sebuah kelas memiliki tanggung jawab yang berlebihan atau mencoba 
+                      melakukan terlalu banyak hal sekaligus, pertimbangkan untuk memisahkan 
+                      fungsionalitasnya ke dalam kelas-kelas yang lebih spesifik. Dengan 
+                      memisahkan fungsionalitas yang berbeda ke dalam kelas-kelas yang lebih 
+                      kecil dan terfokus, Anda dapat meningkatkan modularitas dan keterbacaan 
+                      kode Anda.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <b>Penggunaan Desain Berorientasi Objek yang Lebih Baik:</b>
+                      Evaluasi desain berorientasi objek dari proyek Anda dan pastikan bahwa 
+                      kelas-kelas Anda memiliki tanggung jawab yang jelas dan terdefinisi dengan 
+                      baik. Gunakan prinsip-prinsip desain berorientasi objek seperti SOLID untuk 
+                      memastikan bahwa setiap kelas memiliki satu tujuan yang jelas dan memenuhi 
+                      prinsip-prinsip desain yang baik.
+                    </p>
+                  </li>
+                </ol>
+                <p>
+                  Dengan menerapkan strategi ini, Anda dapat mengatasi Data Class dalam kode sumber 
+                  Anda dan meningkatkan kebersihan serta efektivitas dari proyek perangkat lunak yang 
+                  Anda kembangkan. Teruslah memperhatikan pola-pola yang tidak efisien dalam kode Anda 
+                  dan berusaha untuk memperbaiki mereka demi mencapai struktur kode yang lebih baik dan 
+                  lebih mudah dipelihara.
+                </p>
+              </div>
+              <br />
+          <div class="contoh-kasus">
+            <li><h4>Contoh Kasus</h4></li>
+            <p>
+              Ketika produk baru awal-awal di-code, sangat wajar bila banyak class yang belum memiliki behavior (baru isi data saja).
+              Namun, bila produk sudah makin berkembang, namun masih ada suatu class yang hanya berisi setter/getter, sudah sinyal kuat untuk dilakukan refactor.
+            </p>
+            <p>Pada contoh kasus FullName.java, class hanya berisi setter getter untuk field firstName dan lastName.</p>
+            <h5 style="text-align: center">Before</h5>
+            <div class="container">
+              <div class="box-code">
+                <p style="font-weight: bold">FullName.java :</p>
+                <pre><code class="language-java">
+  package fowler.dispensables.data_class.before;
+  
+  public class FullName {
+      private String firstName;
+      private String lastName;
+      
+      public FullName(String firstName, String lastName) {
+          super();
+          this.firstName = firstName;
+          this.lastName = lastName;
+      }
+      
+      public String getFirstName() {
+          return firstName;
+      }
+      public void setFirstName(String firstName) {
+          this.firstName = firstName;
+      }
+      public String getLastName() {
+          return lastName;
+      }
+      public void setLastName(String lastName) {
+          this.lastName = lastName;
+      }
+  }
+              </code></pre>
+              </div>
+            </div>
+            <br>
+            <div class="container">
+              <div class="box-code">
+                <p style="font-weight: bold">User.java</p>
+                <pre><code class="language-java">
+  package fowler.dispensables.data_class.before;
+  
+  public class User {
+      private FullName fullName;
+      
+      private String address;
+      private String phone;
+      
+      //...
+      //another User behaviors...
+      //...
+      
+      public void login() {
+          //...
+      }
+      
+      public void logout() {
+          //...
+      }
+  }         
+              </code></pre>
+              </div>
+            </div>
+            <br />
+            
+            <h5 style="text-align: center">After</h5>
+  
+            <div class="container">
+              <div class="box-code">
+                <p style="font-weight: bold">User.java :</p>
+                <pre><code class="language-java">
+  package fowler.dispensables.data_class.after;
+  
+  public class User {
+      private String firstName;
+      private String lastName;
+      
+      private String address;
+      private String phone;
+      
+      //...
+      //another User behaviors...
+      //...
+      
+      public void login() {
+          //...
+      }
+      
+      public void logout() {
+          //...
+      }
+  }
+              </code></pre>
+              </div>
+            </div>
+            <br />
+            <br>
+            <p>Semua field dari FullName dipindahkan ke User.java. Kemudian class FullName dihapus.</p>
+            <p>Atau tambahkan method-method untuk melengkapi Data Class jika memerlukan fungsionalitas. Anda juga bisa biarkan smell ini terjadi bila
+              Data Class tersebut difungsikan untuk keperluan Domain-Driven Programming terutama pada level Repository atau Model.</p>
+          </div>
+        </div>
+      </div>
+</body>
+    <script src="script.js"></script>
+    <script src="prism/prism.js"></script>
+</html>
